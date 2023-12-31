@@ -1,0 +1,22 @@
+.form_style{
+  position: relative;
+  outline: 0px;
+  margin: auto;
+  display: flex;
+  -webkit-box-pack: center;
+  padding: 24px;
+  background-color: white;
+  border-width: 1px 0px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  border-style: solid;
+  /* border-color: rgb(78, 80, 82); */
+  border-color: gray;
+  border-image: initial;
+  width: 35%;
+}
+
+.border-style{
+  border-radius: 10px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+}

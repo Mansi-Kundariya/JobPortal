@@ -1,0 +1,30 @@
+const ErrorResponse = require("../utils/errorResponse");
+const User = require("../models/userModel");
+const jwt = require('jsonwebtoken');
+
+// check if user is authenticated
+// if user is not created (without sign in) then user will not get access
+
+exports.isAuthenticated = async (req, res, next) => {
+    const { token } = req.cookies;
+    
+    // make sure token exist
+    if(!token){
+        return next(new ErrorResponse("Not authorized to access this route", 401));
+    }
+    try {
+        //verify token 
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = await User.findById(decoded.id); // req.user is user model. 
+        next();
+    } catch (error) {
+        return next(new ErrorResponse("Not authorized to access this route", 401));
+    }
+}
+
+// middleware for admin 
+exports.isAdmin = (req, res, next) => {
+    if(req.user.role === 0){
+        return next(new ErrorResponse('Access denied, you must an admin', 401));
+    }
+}
